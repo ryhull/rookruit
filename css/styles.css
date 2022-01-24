@@ -18,7 +18,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     height: 100vh;
 }
 
@@ -39,7 +39,7 @@ body {
 ***********************************************/
 
 header {
-    background-color: #393939;
+    background-color: #444444;
     width: 100%;
     color: #ffffff;
     display: flex;
@@ -61,16 +61,52 @@ ul {
     align-items: center;
     list-style: none;
 }
-nav ul li:last-of-type {
+nav > ul > li:last-of-type {
     margin-left: 30px;
 }
 nav ul a {
     cursor: pointer;
+    color: white;
+    text-decoration: none;
 }
 
 .logo {
     cursor: default;
 }
+
+.dropdown {
+    position:relative;
+}
+
+.dropdown-box {
+    position:absolute;
+    right:0;
+    background-color:#444444;
+    width:130px;
+    border-radius: 0px 0px 7px 7px;
+    padding-top:10px;
+    height:0px;
+    overflow:hidden;
+    transition:0.25s;
+}
+
+.dropdown-box ul {
+    flex-direction:column;
+}
+
+.dropdown-box li {
+    padding:15px 0px;
+    border-bottom:solid 1px #d0d0d0;
+}
+
+.dropdown-box li:last-of-type {
+    border-bottom:none;
+}
+
+nav a:hover {
+    text-shadow: 0px 0px white;
+}
+
 
 /***********************************************
 *                    POSTS                     *
@@ -84,6 +120,10 @@ nav ul a {
     margin-right: 25px;
 }
 
+.posts-container > p {
+    text-align:center;
+}
+
 .post {
     background-color: #ffffff;
     padding: 25px;
@@ -92,7 +132,7 @@ nav ul a {
 
 .post-header {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: auto auto;
     grid-template-rows: 1fr 1fr;
     gap: 10px;
     border-bottom: solid 2px #a4a4a4;
