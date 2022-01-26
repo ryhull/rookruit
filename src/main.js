@@ -11,7 +11,7 @@ window.onload = () => {
 searchForm.onsubmit = (e) => {
     e.preventDefault();
     fetch(
-        `server/search.php?skill=${this.searchskill.value}&seeking=${this.searchseeking.value}&idea=${this.searchidea.value}`
+        `server/search.php?role=${this.searchrole.value}&seeking=${this.searchseeking.value}&idea=${this.searchidea.value}`
     )
         .then((response) => response.json())
         .then(createPosts);
@@ -24,12 +24,14 @@ addPostForm.onsubmit = (e) => {
     )
         .then((response) => response.text())
         .then((response) => {
-            console.log(response);
             if (response == "failure") {
                 // Show Error
                 return;
             }
-            if (response == "success") fetchPosts();
+            if (response == "success") { 
+                toggleModal();
+                resetModal();
+                fetchPosts()};
         });
 };
 
@@ -47,17 +49,15 @@ document.querySelector(".dropdown").addEventListener("mouseout", () => {
 
 function fetchPosts() {
     fetch("server/getposts.php", { credentials: "include" })
-        .then((response) => response.text())
+        .then((response) => response.json())
         .then(createPosts);
 }
 
 function createPosts(data) {
-    console.log(data)
-    if (data.length > 15)
-        return;
     posts = data;
+
     // Emptying posts container
-    while (postsContainer.firstElementChild)
+    while (postsContainer.firstElementChild) // THINK THE PROBLEM COULD BE THE THIS FUNCTION SOMEHOW LOOPING INFINITELY, HENCE NO POSTS SHOWING
         postsContainer.firstElementChild.remove();
     if (posts.length > 0) {
         // Creating posts
@@ -79,6 +79,13 @@ function createPosts(data) {
         postsContainer.innerHTML +=
             "<p>Sorry, there were no posts found matching your search.</p>";
     }
+}
+
+function resetModal() {
+    addPostForm.author.value = "";
+    addPostForm.role.value = "Designer";
+    addPostForm.seeking.value = "Designer";
+    addPostForm.body.value = "";
 }
 
 function toggleModal() {

@@ -2,15 +2,15 @@
 
 include "connect.php";
 
-$skill = filter_input(INPUT_GET, "searchskill", FILTER_SANITIZE_SPECIAL_CHARS);
-$seeking = filter_input(INPUT_GET, "searchseeking", FILTER_SANITIZE_SPECIAL_CHARS);
-$idea = filter_input(INPUT_GET, "searchidea", FILTER_SANITIZE_SPECIAL_CHARS);
+$role = filter_input(INPUT_GET, "role", FILTER_SANITIZE_SPECIAL_CHARS);
+$seeking = filter_input(INPUT_GET, "seeking", FILTER_SANITIZE_SPECIAL_CHARS);
+$idea = filter_input(INPUT_GET, "idea", FILTER_SANITIZE_SPECIAL_CHARS);
 
 $posts = [];
 
 // Ensuring "Show All" returns any value within its respective column
-if ($skill == "all")
-    $skill = "%";
+if ($role == "all")
+    $role = "%";
 if ($seeking == "all")
     $seeking = "%";
 if ($idea == "all")
@@ -18,7 +18,7 @@ if ($idea == "all")
 
 $command = "SELECT * FROM postings WHERE role LIKE ? AND seeking LIKE ? AND idea LIKE ? ORDER BY postid DESC LIMIT 15";
 $stmt = $dbh->prepare($command);
-$params = [$skill, $seeking, $idea];
+$params = [$role, $seeking, $idea];
 $success = $stmt->execute($params);
 
 if ($success) {
