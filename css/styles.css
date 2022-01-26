@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 :root {
     --content-width-max: 1100px;
@@ -31,7 +31,7 @@ body {
     scrollbar-width: thin;
     scrollbar-color: #a6a6a6 #e8e8e8;
     margin: 25px 0px;
-    gap:25px;
+    gap: 25px;
 }
 
 /***********************************************
@@ -75,38 +75,37 @@ nav ul a {
 }
 
 .dropdown {
-    position:relative;
+    position: relative;
 }
 
 .dropdown-box {
-    position:absolute;
-    right:0;
-    background-color:#444444;
-    width:130px;
+    position: absolute;
+    right: 0;
+    background-color: #444444;
+    width: 130px;
     border-radius: 0px 0px 7px 7px;
-    padding-top:10px;
-    height:0px;
-    overflow:hidden;
-    transition:0.25s;
+    padding-top: 10px;
+    height: 0px;
+    overflow: hidden;
+    transition: 0.25s;
 }
 
 .dropdown-box ul {
-    flex-direction:column;
+    flex-direction: column;
 }
 
 .dropdown-box li {
-    padding:15px 0px;
-    border-bottom:solid 1px #d0d0d0;
+    padding: 15px 0px;
+    border-bottom: solid 1px #d0d0d0;
 }
 
 .dropdown-box li:last-of-type {
-    border-bottom:none;
+    border-bottom: none;
 }
 
 nav a:hover {
     text-shadow: 0px 0px white;
 }
-
 
 /***********************************************
 *                    POSTS                     *
@@ -121,7 +120,7 @@ nav a:hover {
 }
 
 .posts-container > p {
-    text-align:center;
+    text-align: center;
 }
 
 .post {
@@ -160,7 +159,7 @@ nav a:hover {
 }
 
 .post-role {
-    font-size:21px;
+    font-size: 21px;
 }
 
 /***********************************************
@@ -187,7 +186,7 @@ nav a:hover {
     gap: 5px;
 }
 
-#search-btn {
+#search-btn, #submit-btn {
     width: 100%;
     background-color: #393939;
     color: #e3e3e3;
@@ -195,15 +194,81 @@ nav a:hover {
 }
 
 form select,
-#search-btn {
+#search-btn,
+#submit-btn {
     padding: 5px;
     border: none;
     border-radius: 5px;
-    font-size:14px;
-    cursor:pointer;
+    font-size: 14px;
+    cursor: pointer;
 }
 
-#search-btn:hover {
-    background-color:#444444;
-    color:white;
+#search-btn:hover, #submit-btn:hover {
+    background-color: #444444;
+    color: white;
+}
+
+/***********************************************
+*                     MODAL                    *
+***********************************************/
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: -1px 1px 3px 3px #b3b3b3;
+    color: #535353;
+    font-size: 17px;
+    z-index:5;
+    overflow-y: auto;
+    scrollbar-width:thin;
+    display:none;
+}
+
+.modal > form {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0px 20px 20px 20px;
+}
+
+.modal > form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+#author,
+#body {
+    font-size: 16px;
+    font-family: roboto, sans-serif;
+    border-radius: 5px;
+    border: solid 2px #939393;
+    padding: 2px 5px;
+    color: #626262;
+}
+
+#body {
+    padding: 5px;
+}
+
+.modal > div:first-of-type {
+    width: 100%;
+    text-align: right;
+    padding-right: 9px;
+}
+
+.modal i {
+    color: #bbb;
+    transform: translateX(3px);
+    cursor: pointer;
+    transition:0.2s;
+}
+
+.modal i:hover {
+    color: #505050;
 }

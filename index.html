@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rookruit</title>
+    <title>Rookruit Prototype</title>
     <link rel="shortcut icon" type="image/jpg" href="src/images/favicon.png"/>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/mobile.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous"/>
 </head>
 <body>
@@ -30,27 +31,64 @@
         </nav>
       </header>
       <div id="content">
+        <div class="modal">
+          <div>
+            <i id="close-modal-btn" class="fas fa-times fa-2x"></i>
+          </div>
+          <form id="add-post-form">
+            <div>
+              <label for="author">Alias</label>
+              <input type="text" name="author" id="author" placeholder="Guy Incognito" required>
+            </div>
+            <div>
+              <label for="role">I'm a...</label>
+              <select name="role" id="role">
+                <option value="Designer">Designer</option>
+                <option value="Developer">Developer</option>
+              </select>
+            </div>
+            <div>
+              <label for="seeking">Seeking a...</label>
+              <select name="seeking" id="seeking">
+                <option value="Designer">Designer</option>
+                <option value="Developer">Developer</option>
+              </select>
+            </div>
+            <div>
+              <label for="idea">Do you have a project idea?</label>
+              <select name="idea" id="idea">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
+            </div>
+            <div>
+              <label for="body">Details</label>
+              <textarea type="text" name="body" id="body" cols="50" rows="5" placeholder="Enter project details, contact info, etc..." required></textarea>
+            </div>
+            <input id="submit-btn" type="submit" value="SUBMIT">
+          </form>
+        </div>
         <div class="filters-container">
           <form id="search-form">
             <div>
-              <label for="skill">Skill Set:</label>
-              <select name="skill" id="skill">
+              <label for="searchskill">Skill Set:</label>
+              <select name="searchskill" id="searchskill">
                 <option value="all">Show All</option>
                 <option value="Designer">Designer</option>
                 <option value="Developer">Developer</option>
               </select>    
             </div>
             <div>
-              <label for="seeking">Seeking:</label>
-              <select name="seeking" id="seeking">
+              <label for="searchseeking">Seeking:</label>
+              <select name="searchseeking" id="searchseeking">
                 <option value="all">Show All</option>
                 <option value="Designer">Designer</option>
                 <option value="Developer">Developer</option>
               </select>  
             </div>
             <div>
-              <label for="idea">Has Idea:</label>
-              <select name="idea" id="idea">
+              <label for="searchidea">Has Idea:</label>
+              <select name="searchidea" id="searchidea">
                 <option value="all">Show All</option>
                 <option value="Yes">Yes</option>
                 <option value="No">No</option>

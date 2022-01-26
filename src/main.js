@@ -1,19 +1,60 @@
 const postsContainer = document.querySelector(".posts-container");
 const searchForm = document.getElementById("search-form");
+const addPostForm = document.getElementById("add-post-form");
+const modal = document.querySelector(".modal");
 let posts = [];
 
-window.addEventListener("load", () => {
+window.onload = () => {
     fetchPosts();
-})
+};
+
+searchForm.onsubmit = (e) => {
+    e.preventDefault();
+    fetch(
+        `server/search.php?skill=${this.searchskill.value}&seeking=${this.searchseeking.value}&idea=${this.searchidea.value}`
+    )
+        .then((response) => response.json())
+        .then(createPosts);
+};
+
+addPostForm.onsubmit = (e) => {
+    e.preventDefault();
+    fetch(
+        `server/addpost.php?author=${this.author.value}&role=${this.role.value}&seeking=${this.seeking.value}&idea=${this.idea.value}&body=${this.body.value}`
+    )
+        .then((response) => response.text())
+        .then((response) => {
+            console.log(response);
+            if (response == "failure") {
+                // Show Error
+                return;
+            }
+            if (response == "success") fetchPosts();
+        });
+};
+
+document.getElementById("close-modal-btn").onclick = toggleModal;
+
+document.getElementById("create-post-btn").onclick = toggleModal;
+
+document.querySelector(".dropdown").addEventListener("mouseover", () => {
+    document.querySelector(".dropdown-box").style.height = "109px";
+});
+
+document.querySelector(".dropdown").addEventListener("mouseout", () => {
+    document.querySelector(".dropdown-box").style.height = "0px";
+});
 
 function fetchPosts() {
     fetch("server/getposts.php", { credentials: "include" })
-        .then((response) => response.json())
-        .then(createPosts)
+        .then((response) => response.text())
+        .then(createPosts);
 }
 
 function createPosts(data) {
-
+    console.log(data)
+    if (data.length > 15)
+        return;
     posts = data;
     // Emptying posts container
     while (postsContainer.firstElementChild)
@@ -35,22 +76,15 @@ function createPosts(data) {
                 </div>
             `;
     } else {
-        postsContainer.innerHTML += "<p>Sorry, there were no posts found matching your search.</p>"
+        postsContainer.innerHTML +=
+            "<p>Sorry, there were no posts found matching your search.</p>";
     }
 }
 
-searchForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    fetch(`server/search.php?skill=${this.skill.value}&seeking=${this.seeking.value}&idea=${this.idea.value}`)
-        .then((response) => response.json())
-        .then(createPosts)
-})
-
-document.querySelector(".dropdown").addEventListener("mouseover", () => {
-    document.querySelector(".dropdown-box").style.height = "109px"
-})
-
-document.querySelector(".dropdown").addEventListener("mouseout", () => {
-    document.querySelector(".dropdown-box").style.height = "0px"
-})
+function toggleModal() {
+    if (modal.style.display == "") {
+        modal.style.display = "initial";
+        return;
+    }
+    modal.style.display = "";
+}

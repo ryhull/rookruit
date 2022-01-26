@@ -4,7 +4,7 @@ include "connect.php";
 
 $posts = [];
 
-$command = "SELECT * FROM postings ORDER BY posted DESC LIMIT 15";
+$command = "SELECT * FROM postings ORDER BY postid DESC LIMIT 15";
 $stmt = $dbh->prepare($command);
 $success = $stmt->execute();
 
